@@ -32,6 +32,6 @@ Analyze local Windows security logs to identify authentication attempts and proc
 *   **Process Executed:** `whoami`
 *   **User Context:** `desktop-mp363ir\atik`
 
-## 🧠 Lessons Learned & Recruiter Notes
+##  Lessons Learned & Recruiter Notes
 *   **Logon Types Matter:** I learned that tracking Event ID 4624 isn't just about knowing *who* logged in, but *how*. A Logon Type 2 (physical keyboard) is normal, but a Logon Type 3 (network) from an unknown IP is a critical incident.
 *   **The Power of Sysmon:** Default Windows logging misses a lot of command-line execution. Installing Sysmon allowed me to capture post-exploitation discovery commands like `whoami`, which attackers frequently use immediately after gaining a shell.
