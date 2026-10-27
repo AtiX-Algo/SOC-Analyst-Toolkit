@@ -21,15 +21,17 @@ Analyze local Windows security logs to identify authentication attempts and proc
 ![Event ID 4624 Successful Logon](../screenshots/success-logon.jpg)
 
 *   **Logon Type:** 2 (Interactive / Physical Keyboard)
-*   *(Analyst Note: Logon Type 2 means someone was physically at the keyboard. Logon Type 3 means they logged in over the network. If I see Type 3 from a strange IP address, it is a major security incident).*
 
 ## 3. Sysmon & Process Creation
-**What this is:** Sysmon monitors and logs system activity to the Windows event log. It provides detailed information about process creation.
-**Why SOC monitors this:** If malware gets on a computer, it has to run a process. Monitoring processes helps detect malicious commands (like PowerShell executing enumeration commands).
+**What this is:** Sysmon monitors and logs system activity to the Windows event log. It provides detailed information about process creation (Event ID 1).
+**Why SOC monitors this:** Monitoring processes helps detect malicious commands.
 
 **My Findings:**
 ![Sysmon Process Creation](../screenshots/powershell-process.png)
 
 *   **Process Executed:** `whoami`
 *   **User Context:** `desktop-mp363ir\atik`
-*   *(Analyst Note: An attacker often runs `whoami` immediately after gaining a shell to determine their privilege level. Detecting this command running from a suspicious parent process is a high-fidelity alert).*
+
+## 🧠 Lessons Learned & Recruiter Notes
+*   **Logon Types Matter:** I learned that tracking Event ID 4624 isn't just about knowing *who* logged in, but *how*. A Logon Type 2 (physical keyboard) is normal, but a Logon Type 3 (network) from an unknown IP is a critical incident.
+*   **The Power of Sysmon:** Default Windows logging misses a lot of command-line execution. Installing Sysmon allowed me to capture post-exploitation discovery commands like `whoami`, which attackers frequently use immediately after gaining a shell.
