@@ -16,7 +16,7 @@ nmap -sV -p 1-1000 192.168.189.1
 
 Successfully identified open ports including RPC (135), NetBIOS (139), and SMB (445).
 
-![Nmap Network Scan](screenshots/nmap-scan.jpg)
+![Nmap Network Scan](../screenshots/nmap-scan.jpg)
 
 ## Attack 2: SMB Brute-Force Simulation (Credential Access)
 
@@ -31,7 +31,7 @@ FOR /L %i IN (1,1,10) DO net use \\localhost\IPC$ /user:hacker%i wrongpassword12
 
 Generated a rapid sequence of System Error 1326 (Logon Failure) alerts.
 
-![SMB Brute Force Simulation](screenshots/smb-bruteforce.png)
+![SMB Brute Force Simulation](../screenshots/smb-bruteforce.png)
 
 ## Attack 3: Malicious PowerShell (Execution & Defense Evasion)
 
